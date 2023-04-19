@@ -10,6 +10,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+default:
+  run:
+    working-directory: ./FactorySorterApp
+
 # Defines a single job named "build"
 jobs:
   build:
