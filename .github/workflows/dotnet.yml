@@ -1,40 +1,37 @@
 # Workflow name
 # Rename the defaul name to below
-
 name: Build and Run Unit Tests
- 
 
 # Trigger this workflow on a push, or pull request to
 # the main branch, when either C# or project files changed
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 # Defines a single job named "build"
 jobs:
-  build:
-    # specfies the virtual environment the steps will run on (i.e. the runner) - in this case the latest version of ubuntu (open source Linux OS)
-    runs-on: ubuntu-latest
- 
-    steps:
-    # step 1: Checkout source code under $GITHUB_WORKSPACE - allows workflow to access it
-    - uses: actions/checkout@v3
-    # step 2: Sets up a .NET CLI environment for the workflow to use
-    - name: Setup .NET 
-      uses: actions/setup-dotnet@v2
-      with:
-         #.NET version specified
-        dotnet-version: 6.0.x
-    # step 3: restore NuGet packages for .NET project
-    - name: Restore dependencies
-      run: dotnet restore
-    # step 4: build project '--no-restore': do not restore NuGet packages 
-    - name: Build
-      run: dotnet build --no-restore
+  build:
+    # specfies the virtual environment the steps will run on (i.e. the runner) - in this case the latest version of ubuntu (open source Linux OS)
+    runs-on: ubuntu-latest
 
-    # step 5: run tests
-    - name: Test
-      #tests are run but it doesnt build the test project before runninf it
-      run: dotnet test --no-build --verbosity normal
+    steps:
+    # step 1: Checkout source code under $GITHUB_WORKSPACE - allows workflow to access it
+    - uses: actions/checkout@v3
+    # step 2: Sets up a .NET CLI environment for the workflow to use
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v2
+      with:
+         #.NET version specified
+        dotnet-version: 6.0.x
+    # step 3: restore NuGet packages for .NET project
+    - name: Restore dependencies
+      run: dotnet restore
+    # step 4: build project '--no-restore': do not restore NuGet packages 
+    - name: Build
+      run: dotnet build --no-restore
+    # step 5: run tests
+    - name: Test
+      #tests are run but it doesnt build the test project before runninf it
+      run: dotnet test --no-build --verbosity normal
