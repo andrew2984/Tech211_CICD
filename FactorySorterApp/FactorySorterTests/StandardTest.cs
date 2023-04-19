@@ -18,4 +18,10 @@ public class StandardTest
         int[] actualResult = AG1.SortableArray;
         Assert.That(actualResult, Is.Ordered);
     }
+
+    [Test]
+    public void Fail()
+    {
+        Assert.Fail();
+    }
 }
